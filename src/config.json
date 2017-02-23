@@ -1,0 +1,12 @@
+{
+  "contentful": {
+    "spaceId": "fau8vyrocjx3",
+    "deliveryAccessToken": "005a655e7129e90e3cac4ec6569dbc6c3f3f8196eeaf044ca9a1345291a9bba9",
+    "contentTypeId": "article",
+    "locale": "en-US"
+  },
+  "pubnub": {
+    "subscribeKey": "sub-c-3e2a7750-d66b-11e6-b691-02ee2ddab7fe",
+    "channel": "articles"
+  }
+}
