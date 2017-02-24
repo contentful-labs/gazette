@@ -37,6 +37,7 @@ const FieldValue = React.createClass({
   },
   render: function () {
     const props = {
+      style: {padding: '10px', backgroundColor: this.state.editing && '#fff'},
       ref: el => this.el = el,
       onClick: this.edit,
       onBlur: this.save,

@@ -1,27 +1,32 @@
 'use strict';
 
 const React = require('react');
+const Radium = require('radium');
 
+const style = require('./style.js').articles;
 const FieldValue = require('./field-value.js');
 
 const Article = React.createClass({
   propTypes: {
-    entry: React.PropTypes.object.isRequired
+    entry: React.PropTypes.object.isRequired,
+    i: React.PropTypes.number.isRequired
   },
   getChildContext: function () {
     return {getEntry: () => this.props.entry};
   },
   render: function () {
-    return <div className="column">
-      <div className="head">
-        <div className="headline hl1">
-          <FieldValue fieldId="title" />
-        </div>
-        <div className="headline hl2">
-          <FieldValue fieldId="lead" />
-        </div>
-        <FieldValue fieldId="content" />
-      </div>
+    return <div style={[style.article, style.articleBorder(this.props.i)]}>
+      <h2 style={[style.heading, style.title, style.titleVariant(this.props.i)]}>
+        <FieldValue fieldId="title" />
+      </h2>
+
+      <h3 style={style.heading}>
+        <div style={style.leadBeforeAfter} />
+        <FieldValue fieldId="lead" />
+        <div style={style.leadBeforeAfter} />
+      </h3>
+
+      <FieldValue fieldId="content" />
     </div>;
   }
 });
@@ -30,13 +35,17 @@ Article.childContextTypes = {
   getEntry: React.PropTypes.func
 };
 
+const StyledArticle = Radium(Article);
+
 const Articles = ({entries}) => {
   if (Array.isArray(entries) && entries.length > 0) {
-    return <div className="columns">
-      {entries.map((entry, i) => <Article entry={entry} i={i} key={entry.sys.id} />)}
+    return <div style={style.grid}>
+      {entries.map((entry, i) => {
+        return <StyledArticle entry={entry} i={i} key={entry.sys.id} />;
+      })}
     </div>;
   } else {
-    return <div>There are no articles yet.</div>;
+    return <div className="state-msg">There are no articles yet.</div>;
   }
 };
 
@@ -44,4 +53,4 @@ Articles.propTypes = {
   entries: React.PropTypes.array
 };
 
-module.exports = Articles;
+module.exports = Radium(Articles);

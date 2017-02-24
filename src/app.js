@@ -1,9 +1,11 @@
 'use strict';
 
 const React = require('react');
+const Radium = require('radium');
 
 const client = require('./contentful.js');
 const pubsub = require('./pubnub.js');
+const style = require('./style.js').app;
 const Articles = require('./articles.js');
 
 const App = React.createClass({
@@ -39,17 +41,25 @@ const App = React.createClass({
     );
   },
   render: function () {
-    return <div className="head">
-      <header>
+    if (this.state.loading) {
+      return <div className="state-msg">Loading...</div>;
+    }
+
+    const linkProps = {target: '_blank', style: {color: 'rgba(0, 0, 0, .5)'}};
+
+    return <div style={style.container}>
+      <h1 style={[style.heading, style.title]}>
         Contentful Gazette
         {!this.state.updater && <button onClick={this.edit}>edit!</button>}
-      </header>
-      <div className="subhead">
-        Berlin, Germany - {(new Date()).toDateString()}
+      </h1>
+      <div style={[style.heading, style.line]}>
+        Berlin, Germany – {(new Date()).toDateString()}
       </div>
-      <div className="content">
-        {this.state.loading && <div>Loading...</div>}
-        {!this.state.loading && <Articles entries={this.state.entries} />}
+      <Articles entries={this.state.entries} />
+      <div style={[style.footer, style.line]}>
+        ♥ Built with <a href="https://facebook.github.io/react/" {...linkProps}>React</a>,
+        {' '}<a href="https://www.contentful.com/" {...linkProps}>Contentful</a>
+        {' '}and <a href="https://www.pubnub.com/" {...linkProps}>PubNub</a>
       </div>
     </div>;
   }
@@ -60,4 +70,4 @@ App.childContextTypes = {
   update: React.PropTypes.func
 };
 
-module.exports = App;
+module.exports = Radium(App);
