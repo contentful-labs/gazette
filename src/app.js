@@ -8,6 +8,8 @@ const pubsub = require('./pubnub.js');
 const style = require('./style.js').app;
 const Articles = require('./articles.js');
 
+
+
 const App = React.createClass({
   getInitialState: function () {
     return {loading: true, entries: null};
@@ -17,9 +19,12 @@ const App = React.createClass({
     .then((entries) => {
       this.setState({loading: false, entries});
       pubsub.subscribe(e => this.setState(s => {
-        return {entries: s.entries.map(ee => ee.sys.id === e.sys.id ? e : ee)};
+        return {entries: client.handleWebhookEntry(e, s.entries)};
       }));
     });
+  },
+  componentWillUnmount: function () {
+    pubsub.off();
   },
   getChildContext: function () {
     return {
@@ -31,14 +36,7 @@ const App = React.createClass({
     return typeof this.state.updater === 'function';
   },
   edit: function () {
-    const previous = sessionStorage.getItem('cmaToken') || '';
-    const cmaToken = prompt('Please provide your CMA token:', previous);
-
-    client.createUpdater(cmaToken).then(updater => {
-      this.setState({updater});
-      sessionStorage.setItem('cmaToken', cmaToken);
-    }, () => alert('Something went wrong. Is your token valid?')
-    );
+    client.createUpdater(updater => this.setState({updater}));
   },
   render: function () {
     if (this.state.loading) {
