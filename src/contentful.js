@@ -28,10 +28,11 @@ function getList (limit) {
 function createUpdater (cb) {
   const previous = sessionStorage.getItem('cmaToken') || '';
   const cmaToken = prompt('Please provide your CMA token:', previous);
-  const isTokenValid = typeof cmaToken === 'string' && cmaToken.length > 10;
   const fail = () => alert('Something went wrong. Is your token valid?');
 
-  if (!isTokenValid) {
+  if (typeof cmaToken !== 'string') {
+    return;
+  } else if (cmaToken.length < 15) {
     return fail();
   }
 
