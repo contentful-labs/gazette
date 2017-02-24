@@ -9,7 +9,7 @@
     "watch": "watchify src/index.js -o public/app.js -v -t [ babelify --presets [ es2015 react ] ]",
     "build-dev": "concurrently -k \"npm run serve\" \"npm run watch\"",
     "build-dist": "NODE_ENV=production browserify src/index.js -o public/app.js -v -t [ babelify --presets [ es2015 react ] ] && uglifyjs public/app.js -m -o public/app.js",
-    "deploy-gh": "echo gh"
+    "deploy-gh": "npm run build-dist && gh-pages -d public"
   },
   "dependencies": {
     "contentful": "^3.8.1",
@@ -27,6 +27,7 @@
     "concurrently": "^3.3.0",
     "eslint": "^3.16.1",
     "eslint-plugin-react": "^6.10.0",
+    "gh-pages": "^0.12.0",
     "http-server": "^0.9.0",
     "uglify-js": "^2.7.5",
     "watchify": "^3.9.0"
