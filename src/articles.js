@@ -17,16 +17,16 @@ const Article = React.createClass({
   render: function () {
     return <div style={[style.article, style.articleBorder(this.props.i)]}>
       <h2 style={[style.heading, style.title, style.titleVariant(this.props.i)]}>
-        <FieldValue fieldId="title" />
+        <FieldValue fieldId="title" html={false} />
       </h2>
 
       <h3 style={style.heading}>
         <div style={style.leadBeforeAfter} />
-        <FieldValue fieldId="lead" />
+        <FieldValue fieldId="lead" html={false} />
         <div style={style.leadBeforeAfter} />
       </h3>
 
-      <FieldValue fieldId="content" />
+      <FieldValue fieldId="content" html={true} />
     </div>;
   }
 });

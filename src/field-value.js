@@ -1,10 +1,12 @@
 'use strict';
 
 const React = require('react');
+const sanitizeHtml = require('sanitize-html');
 
 const FieldValue = React.createClass({
   propTypes: {
-    fieldId: React.PropTypes.string.isRequired
+    fieldId: React.PropTypes.string.isRequired,
+    html: React.PropTypes.bool
   },
   getInitialState: function () {
     return {editing: false};
@@ -17,23 +19,24 @@ const FieldValue = React.createClass({
       console.log('Cannot edit w/o CMA token.');
     }
   },
+  sanitize: function (value) {
+    const allowedTags = this.props.html ? ['b', 'strong', 'i', 'em', 'div', 'br'] : [];
+    return sanitizeHtml(value, {allowedTags, allowedAttributes: []});
+  },
   save: function () {
     this.setState({editing: false});
     if (this.context.canUpdate()) {
       this.context.update(
         this.context.getEntry().sys.id,
         this.props.fieldId,
-        this.getHTMLContent()
+        this.sanitize(this.el.innerHTML)
       );
     }
   },
-  getHTMLContent: function () {
-    // TODO a lot of bad markup here
-    return this.el.innerHTML;
-  },
   getSanitizedValue: function () {
-    // TODO it's not sanitized!
-    return {__html: this.context.getEntry().fields[this.props.fieldId]};
+    const entry = this.context.getEntry();
+    const value = entry.fields[this.props.fieldId];
+    return {__html: this.sanitize(value)};
   },
   render: function () {
     const props = {

@@ -19,7 +19,8 @@
     "pubnub": "^4.4.4",
     "radium": "^0.18.1",
     "react": "^15.4.2",
-    "react-dom": "^15.4.2"
+    "react-dom": "^15.4.2",
+    "sanitize-html": "^1.14.1"
   },
   "devDependencies": {
     "babelify": "^7.3.0",
