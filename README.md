@@ -2,6 +2,8 @@
 
 *bidirectional real-time content management and delivery*
 
+![Demo](./demo.gif)
+
 ## Disclaimers
 
 This application was produced during a hackathon. It's a quick Proof of Concept created in 8h. It's not ready to be used in production.
