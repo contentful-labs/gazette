@@ -18,11 +18,14 @@ module.exports = {
 
 function getList (limit) {
   limit = limit || 6;
-  const order = 'sys.createdAt';
+  const order = '-sys.createdAt';
   const content_type = config.contentTypeId;
   const params = {limit, order, content_type};
 
-  return cda.getEntries(params).then(res => res.items);
+  return cda.getEntries(params).then(
+    res => res.items,
+    () => alert('Something went wrong. Is a valid space ID provided?')
+  );
 }
 
 function createUpdater (cb) {
