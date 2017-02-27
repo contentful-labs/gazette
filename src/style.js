@@ -39,7 +39,11 @@ const articles = {
   },
   article: {
     padding: '30px 30px 50px',
-    width: '33.33%'
+    width: '33.33%',
+    '@media (max-width: 800px)': {
+      width: '100%',
+      borderRight: 0
+    }
   },
   articleBorder: i => ({borderBottom: border, borderRight: i%3 !== 2 && border}),
   heading: {
