@@ -16,7 +16,7 @@ This application was produced during a hackathon. It's a quick Proof of Concept 
 
 ### Security
 
-**Never ever give your CMA token away to applications you don't trust**. Contentful Gazette will store your CMA token only until the end of a session. You can verify what we do with your token by studying the code of [src/contentful.js](./src/contentful.js).
+**Never ever give your CMA token away to applications you don't trust**. Contentful Gazette will store your CMA token in-memory only until the browser tab is closed. You can verify what we do with your token by studying the code of [src/contentful.js](./src/contentful.js).
 
 ## Setting up your own Gazette
 

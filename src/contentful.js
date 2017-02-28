@@ -29,8 +29,7 @@ function getList (limit) {
 }
 
 function createUpdater (cb) {
-  const previous = sessionStorage.getItem('cmaToken') || '';
-  const cmaToken = prompt('Please provide your CMA token:', previous);
+  const cmaToken = prompt('Please provide your CMA token:');
   const fail = () => alert('Something went wrong. Is your token valid?');
 
   if (typeof cmaToken !== 'string') {
@@ -41,7 +40,6 @@ function createUpdater (cb) {
 
   mgmt.createClient({accessToken: cmaToken})
   .getSpace(config.spaceId).then(space => {
-    sessionStorage.setItem('cmaToken', cmaToken);
     cb(createUpdaterFor(space, config.locale));
   }, fail);
 }
