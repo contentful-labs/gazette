@@ -48,7 +48,7 @@ const App = React.createClass({
       <div style={style.container}>
         {!this.state.updater && <Ribbon pos="left" color="333" label="Edit this website" onClick={this.edit} />}
         {this.state.updater && <Ribbon pos="left" color="090" label="Click on text to edit" />}
-        <Ribbon pos="right" label="Fork this project" href="https://github.com/contentful/gazette" />
+        <Ribbon pos="right" label="Fork this project" href="https://github.com/contentful-labs/gazette" />
 
         <h1 style={[style.heading, style.title]}>
           Contentful Gazette
