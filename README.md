@@ -40,6 +40,13 @@ This application was produced during a hackathon. It's a quick Proof of Concept 
 2. for your space create a webhook for entry publication events calling PubNub (see below)
 3. update [src/config.json](./src/config.json) with your PubNub subscribe key
 
+### Write changes from Gazette back to Contentful
+
+1. click on the `edit this website` ribbon on the top left corner of gazette and paste your content manegement key
+2. click in any of the textfields and change a value
+3. open gazette in a different tab or look at the entries in the contentful web app to see you changes get synchronized
+
+
 ### Appendix: content type
 
 ![Content type](./ct.png)
