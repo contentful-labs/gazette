@@ -42,7 +42,7 @@ This application was produced during a hackathon. It's a quick Proof of Concept 
 
 ### Write changes from Gazette back to Contentful
 
-1. click on the `edit this website` ribbon on the top left corner of gazette and paste your content manegement key
+1. click on the `edit this website` ribbon on the top left corner of gazette and paste your Content Management API token
 2. click in any of the textfields and change a value
 3. open gazette in a different tab or look at the entries in the Contentful web app to see you changes get synchronized
 
